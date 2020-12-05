@@ -6,8 +6,6 @@ uint16_t gamma;
 void init();
 void contract();
 
-void move();
-void back();
 void sweep();
 void stabilise();
 void pickup();

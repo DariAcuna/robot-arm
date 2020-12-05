@@ -6,9 +6,14 @@ uint16_t gamma;
 void init();
 void contract();
 
+void asduhasdkhsad();
+void asiudhasd();
 void sweep();
 void stabilise();
 void pickup();
+
+void asdhsajdk();
+void asdiuad();
 
 /*  
     servos      angles  CLCx    PORTC

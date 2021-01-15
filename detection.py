@@ -122,17 +122,15 @@ while True:
 
         if 0 < cv.contourArea(cnt) < 13400:
             sweep()
+            stab()
 
-            if is_sweep:
-                stab()
+            if is_sweep and is_stab:
+                ser.write(b'j')
+                print("J")
+                receieveNotice()
 
-                if is_stab:
-                    ser.write(b'j')
-                    print("J")
-                    receieveNotice()
-
-                else:
-                    contractionandinitial()
+        else:
+            contractionandinitial()
 
         break
 

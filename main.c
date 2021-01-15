@@ -250,19 +250,20 @@ void Down(){
     radmu = acos((pow(C+D,2)+pow(A+B,2))/(2*A*B));
     alpha = (int)(radalpha*(180/pi));
     mu = (int)(radmu*(180/pi));
-    theta = 45 - alpha;
-    psi = 90 - mu - alpha;
     
     if (theta >= 10) {      // Lejos
+        psi = 90 - mu;
         mappedpsi = map(psi,-70,70,77,30);
         PWM3_LoadDutyValue(mappedpsi);
     }
     else if(theta < 10) {     // Cerca
         if(psi >= -50){
+            psi = 90 - mu - alpha;
             mappedpsi = map(psi,-70,70,77,30);
             PWM3_LoadDutyValue(mappedpsi);
             theta = 10;
             mappedtheta = map(theta,-70,70,77,30);
+            theta = 45 - alpha;
             PWM2_LoadDutyValue(mappedtheta);
                         
         }
@@ -270,7 +271,7 @@ void Down(){
             psi=-50;
             mappedpsi = map(psi,-70,70,77,30);
             PWM3_LoadDutyValue(mappedpsi);
-            theta = 10;
+            theta = 45 - alpha;
             mappedtheta = map(theta,-70,70,77,30);
             PWM2_LoadDutyValue(mappedtheta);
         }

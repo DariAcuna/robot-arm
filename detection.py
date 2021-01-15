@@ -25,6 +25,11 @@ ser.baudrate = 19200                 # to confirm
 ser.bytesize = serial.EIGHTBITS     # set bytesize to eight bits
 ser.open()                          # open serial port
 
+# variables
+
+is_stab = 0
+is_sweep = 0
+
 
 def receieveNotice():
     # while True:
@@ -34,29 +39,37 @@ def receieveNotice():
 
 
 def sweep():
+    global is_sweep
+
     if y_middle < ymid - dy:
+        is_sweep = 0
         ser.write(b'a')
-        print("A")                  # base servo instruction: rotate anticlockwise
+        print("A")                     # base servo instruction: rotate anticlockwise
         receieveNotice()
     elif y_middle > ymid + dy:
+        is_sweep = 0
         ser.write(b'b')
-        print("B")            # base servo instruction: rotate clockwise
+        print("B")                     # base servo instruction: rotate clockwise
         receieveNotice()
     else:
-        return 1                      # base servo instruction: stay still
+        is_sweep = 1                   # base servo instruction: stay still
 
 
 def stab():
+    global is_stab
+
     if x_middle < xmid - dx:
+        is_stab = 0
         ser.write(b'c')                # shoulder and elbow servos instruction: move 'forwards'
         print("C")
         receieveNotice()
     elif x_middle > xmid + dx:
+        is_stab = 0
         ser.write(b'd')                # shoulder and elbow servos instruction: move 'backwards'
         print("D")
         receieveNotice()
     else:
-        return 1
+        is_stab = 1
 
 
 def contractionandinitial():
@@ -110,10 +123,10 @@ while True:
         if 0 < cv.contourArea(cnt) < 13400:
             sweep()
 
-            if sweep():
+            if is_sweep:
                 stab()
 
-                if stab():
+                if is_stab:
                     ser.write(b'j')
                     print("J")
                     receieveNotice()

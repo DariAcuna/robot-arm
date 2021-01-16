@@ -185,24 +185,26 @@ while True:
 
         if 0 < cv.contourArea(cnt):
             sweep()
+            stab()
 
-            if is_sweep:
-                stab()
+            if is_stab and is_sweep:
+                while True:
+                    ser.write(b'j')
+                    print("J")
 
-                if is_stab:
-                    while True:
-                        ser.write(b'j')
-                        print("J")
+                    if ser.in_waiting > 0:
+                        print(ser.in_waiting)
+                        receivedData = ser.read(1)
+                        print(receivedData)
+                        someChar = receivedData.decode('ascii')
+                        print(someChar)
 
-                        if ser.in_waiting > 0:
-                            print(ser.in_waiting)
-                            receivedData = ser.read(1)
-                            print(receivedData)
-                            someChar = receivedData.decode('ascii')
-                            print(someChar)
+                        if someChar == 's':
+                            break
 
-                            if someChar == 's':
-                                break
+        else:
+            contractionandinitial()
+
         break
 
     key = cv.waitKey(1)

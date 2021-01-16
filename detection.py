@@ -25,55 +25,118 @@ ser.baudrate = 19200                 # to confirm
 ser.bytesize = serial.EIGHTBITS     # set bytesize to eight bits
 ser.open()                          # open serial port
 
-# variables
+receivedData = 0
+somechar = 0
 
-is_stab = 0
 is_sweep = 0
-
-
-def receieveNotice():
-    # while True:
-    #     if ser.read().decode('ascii') == 's':
-    #         break
-    someChar = ser.read(ser.in_waiting)
+is_stab = 0
 
 
 def sweep():
+    global receivedData
+    global someChar
+
     global is_sweep
 
-    if y_middle < ymid - dy:
+    if y_middle < ymid - dy:        # base servo instruction: rotate anticlockwise
         is_sweep = 0
-        ser.write(b'a')
-        print("A")                     # base servo instruction: rotate anticlockwise
-        receieveNotice()
-    elif y_middle > ymid + dy:
+
+        while True:
+            ser.write(b'a')
+            print("A")
+
+            if ser.in_waiting > 0:
+                print(ser.in_waiting)
+                receivedData = ser.read(1)
+                print(receivedData)
+                someChar = receivedData.decode('ascii')
+                print(someChar)
+
+                if someChar == 's':
+                    break
+
+    elif y_middle > ymid + dy:      # base servo instruction: rotate clockwise
         is_sweep = 0
-        ser.write(b'b')
-        print("B")                     # base servo instruction: rotate clockwise
-        receieveNotice()
+
+        while True:
+            ser.write(b'b')
+            print("B")
+
+            if ser.in_waiting > 0:
+                print(ser.in_waiting)
+                receivedData = ser.read(1)
+                print(receivedData)
+                someChar = receivedData.decode('ascii')
+                print(someChar)
+
+                if someChar == 's':
+                    break
+
     else:
-        is_sweep = 1                   # base servo instruction: stay still
+        is_sweep = 1                 # base servo instruction: stay still
 
 
 def stab():
+    global receivedData
+    global someChar
+
     global is_stab
 
-    if x_middle < xmid - dx:
+    if x_middle < xmid - dx:            # shoulder and elbow servos instruction: move 'forwards'
         is_stab = 0
-        ser.write(b'c')                # shoulder and elbow servos instruction: move 'forwards'
-        print("C")
-        receieveNotice()
-    elif x_middle > xmid + dx:
+
+        while True:
+            ser.write(b'c')
+            print("C")
+
+            if ser.in_waiting > 0:
+                print(ser.in_waiting)
+                receivedData = ser.read(1)
+                print(receivedData)
+                someChar = receivedData.decode('ascii')
+                print(someChar)
+
+                if someChar == 's':
+                    break
+
+    elif x_middle > xmid + dx:           # shoulder and elbow servos instruction: move 'backwards'
         is_stab = 0
-        ser.write(b'd')                # shoulder and elbow servos instruction: move 'backwards'
-        print("D")
-        receieveNotice()
+
+        while True:
+            ser.write(b'd')
+            print("D")
+
+            if ser.in_waiting > 0:
+                print(ser.in_waiting)
+                receivedData = ser.read(1)
+                print(receivedData)
+                someChar = receivedData.decode('ascii')
+                print(someChar)
+
+                if someChar == 's':
+                    break
+
     else:
         is_stab = 1
 
 
-def contractionandinitial():
-    ser.write(b't')                    # general instruction: go to contraction amd initial position
+def contractionandinitial():            # general instruction: go to contraction amd initial position
+    global receivedData
+    global someChar
+
+    while True:
+        ser.write(b't')
+        print("T")
+
+        if ser.in_waiting > 0:
+            print(ser.in_waiting)
+            receivedData = ser.read(1)
+            print(receivedData)
+            someChar = receivedData.decode('ascii')
+            print(someChar)
+
+            if someChar == 's':
+                break
 
 
 while True:
@@ -105,7 +168,7 @@ while True:
 
     # draw line that passes through the middle of the square that frames area
     for cnt in contours:
-        if 0 < cv.contourArea(cnt) < 13400:
+        if 0 < cv.contourArea(cnt):
             cv.line(frame, (x_middle, 0), (x_middle, 480), (0, 255, 0), 2)
             cv.line(frame, (0, y_middle), (640, y_middle), (0, 255, 0), 2)
         break
@@ -120,18 +183,26 @@ while True:
 
     for cnt in contours:
 
-        if 0 < cv.contourArea(cnt) < 13400:
+        if 0 < cv.contourArea(cnt):
             sweep()
-            stab()
 
-            if is_sweep and is_stab:
-                ser.write(b'j')
-                print("J")
-                receieveNotice()
+            if is_sweep:
+                stab()
 
-        else:
-            contractionandinitial()
+                if is_stab:
+                    while True:
+                        ser.write(b'j')
+                        print("J")
 
+                        if ser.in_waiting > 0:
+                            print(ser.in_waiting)
+                            receivedData = ser.read(1)
+                            print(receivedData)
+                            someChar = receivedData.decode('ascii')
+                            print(someChar)
+
+                            if someChar == 's':
+                                break
         break
 
     key = cv.waitKey(1)

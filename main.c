@@ -259,29 +259,17 @@ void Down(){
     lambda = (int)(radlambda*(180/pi));
     
     if (theta >= 10) {      // Lejos
-        psi = 90 - mu;
+        psi = 90 - lambda - alpha_0;
         mappedpsi = map(psi,-70,70,77,30);
         PWM3_LoadDutyValue(mappedpsi);
     }
     else if(theta < 10) {     // Cerca
-        if(psi >= -50){
-            psi = 90 - mu - alpha;
-            mappedpsi = map(psi,-70,70,77,30);
-            PWM3_LoadDutyValue(mappedpsi);
-            theta = 10;
-            mappedtheta = map(theta,-70,70,77,30);
-            theta = 45 - alpha;
-            PWM2_LoadDutyValue(mappedtheta);
-                        
-        }
-        else if (psi < -50){
-            psi=-50;
-            mappedpsi = map(psi,-70,70,77,30);
-            PWM3_LoadDutyValue(mappedpsi);
-            theta = 45 - alpha;
-            mappedtheta = map(theta,-70,70,77,30);
-            PWM2_LoadDutyValue(mappedtheta);
-        }
+        psi = 90 - mu - alpha;
+        mappedpsi = map(psi,-70,70,77,30);
+        PWM3_LoadDutyValue(mappedpsi);
+        theta = 45 - alpha;
+        mappedtheta = map(theta,-70,70,77,30);
+        PWM2_LoadDutyValue(mappedtheta);
     }
 }
 

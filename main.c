@@ -57,10 +57,6 @@ double a = 119; //(mm) antebrazo
 double b = 110; // (mm) brazo 
 double c = 90; // (mm) pinza
 
-double A = a;
-double B = b + c;
-double D = d - h;
-
 uint16_t map(int value, int inputMin, int inMax, int outMin, int outMax);
 void servo1();
 //void servo2(); aea mongol
@@ -245,6 +241,9 @@ void Down(){
     double radalpha;
     double radmu;
     double radlambda;
+    double A = a;
+    double B = b + c;
+    double D = d - h;
     double C;
     
     alpha_0 = 45 - theta;  
@@ -283,9 +282,9 @@ void PickUp(){
     gamma=45;
     ChargeDutyValue();
     __delay_ms(1500);
-    phi=-50;
-    psi=0;
+    phi=-55; 
     theta=-45;
+    psi=0;
     ChargeDutyValue();
     __delay_ms(1500);
     gamma=-10;

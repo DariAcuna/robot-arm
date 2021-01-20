@@ -55,7 +55,7 @@ uint16_t theta, mappedtheta;    //shoulder
 uint16_t psi, mappedpsi;        //elbow
 uint16_t gamma, mappedgamma;    //tweezers
 double A = a;
-double C = b +c;
+double B = b + c;
 double D = d - h;
 
 uint16_t map(int value, int inputMin, int inMax, int outMin, int outMax);
@@ -240,11 +240,11 @@ void Down(){
     double radalpha_0;
     double radalpha;
     double radmu;
-    double B;
+    double C;
     
     alpha_0 = 45 - theta;  
     radalpha_0 = alpha*(pi/180);
-    B = b + a*cos(radalpha_0);
+    C = b + a*cos(radalpha_0);
     
     radalpha = asin(C/sqrt(pow(C,2)+pow(D,2)))+asin((pow(B,2)-(pow(A,2)+pow(C,2)+pow(D,2)))/(2*A*sqrt(pow(C,2)+pow(D,2))));
     radmu = acos((pow(C+D,2)+pow(A+B,2))/(2*A*B));

@@ -278,34 +278,6 @@ void PickUp(){
     gamma=-10;
     ChargeDutyValue();
     __delay_ms(1500);
-    /*
-    float forearm = 0.196;
-    float arm = 0.115;
-    
-    float constant = arm * sin((48 / 180) * pi);
-    constant += forearm / cos(asin((arm / forearm)*cos((48 / 180) * pi)));
-    
-    float alfa = 45 + theta;
-    float beta;
-    float beta_close = acos(forearm / (constant - arm * sin(alfa)));
-    float beta_far = asin((arm / forearm)*cos(alfa));
-    
-    if (theta >= 3) {      // Lejos
-        beta = beta_far;
-        do {
-            psi--;
-            ChargeDutyValue();
-        } while (psi > (int)beta - 45 - theta);
-    }
-    else if(theta < 3) {     // Cerca
-        beta = beta_close;
-        do {
-            theta++;
-            psi = (int)beta - 45 - theta;
-            ChargeDutyValue();
-        } while (theta != 3);
-    }
-    */
     Down();
     __delay_ms(1500);
     gamma=45;

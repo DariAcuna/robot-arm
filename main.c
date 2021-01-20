@@ -247,7 +247,7 @@ void Down(){
     C = b + a*cos(radalpha_0);
     
     radalpha = asin(C/sqrt(pow(C,2)+pow(D,2)))+asin((pow(B,2)-(pow(A,2)+pow(C,2)+pow(D,2)))/(2*A*sqrt(pow(C,2)+pow(D,2))));
-    radmu = acos((pow(C+D,2)+pow(A+B,2))/(2*A*B));
+    radmu = asin((pow(B,2)+ pow(D,2)+pow(C,2)-pow(A,2))/(2*B*sqrt(pow(C,2)+pow(D,2)))) - asin(C/sqrt(pow(C,2)+pow(D,2)));
     alpha = (int)(radalpha*(180/pi));
     mu = (int)(radmu*(180/pi));
     

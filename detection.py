@@ -120,7 +120,7 @@ def stab():
         is_stab = 1
 
 
-def contractionandinitial():            # general instruction: go to contraction amd initial position
+def initcont():            # general instruction: go to initial and contraction position
     global receivedData
     global someChar
 
@@ -203,7 +203,7 @@ while True:
                             break
 
         else:
-            contractionandinitial()
+            initcont()
 
         break
 

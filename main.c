@@ -104,6 +104,7 @@ void main(void)
             // If encountered object, movement to initial position is 
             // interrupted to located said object.
             if(getch() == 'j'){
+                sendNotice();
                 continue;
             }
 

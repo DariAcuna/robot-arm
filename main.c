@@ -107,6 +107,7 @@ void main(void)
                 continue;
             }
 
+            // Increase time to 1 minute.
             __delay_ms(1500);
             Contraction();
             ChargeDutyValue();

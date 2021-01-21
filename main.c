@@ -100,6 +100,13 @@ void main(void)
         if(getch() == 't'){  
             Initial();
             ChargeDutyValue();
+            
+            // If encountered object, movement to initial position is 
+            // interrupted to located said object.
+            if(getch() == 'j'){
+                continue;
+            }
+
             __delay_ms(1500);
             Contraction();
             ChargeDutyValue();

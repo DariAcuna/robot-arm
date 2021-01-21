@@ -98,10 +98,10 @@ void main(void)
             sendNotice();
         }
         if(getch() == 't'){  
-            Contraction();
+            Initial();
             ChargeDutyValue();
             __delay_ms(1500);
-            Initial();
+            Contraction();
             ChargeDutyValue();
             __delay_ms(1500);
             sendNotice();

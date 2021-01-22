@@ -84,13 +84,39 @@ void main(void)
 
     // Disable the Global Interrupts
     //INTERRUPT_GlobalInterruptDisable();
-
+    /*
     Initial();
     ChargeDutyValue();
     __delay_ms(1500);
+    */
     
     while (1)
     {
+        theta = -70;
+        mappedtheta = map(theta,-70,70,77,30);
+        PWM2_LoadDutyValue(mappedtheta);
+        __delay_ms(1500);
+        theta = -52;
+        mappedtheta = map(theta,-70,70,77,30);
+        PWM2_LoadDutyValue(mappedtheta);
+        __delay_ms(1500);
+        theta = -45;
+        mappedtheta = map(theta,-70,70,77,30);
+        PWM2_LoadDutyValue(mappedtheta);
+        __delay_ms(1500);
+        theta = -30;
+        mappedtheta = map(theta,-70,70,77,30);
+        PWM2_LoadDutyValue(mappedtheta);
+        __delay_ms(1500);
+        theta = 0;
+        mappedtheta = map(theta,-70,70,77,30);
+        PWM2_LoadDutyValue(mappedtheta);
+        __delay_ms(2000);
+        theta = 10;
+        mappedtheta = map(theta,-70,70,77,30);
+        PWM2_LoadDutyValue(mappedtheta);
+        __delay_ms(2000);
+        /*
         move();
         if(getch() == 'j'){  
             PickUp();
@@ -115,6 +141,7 @@ void main(void)
             __delay_ms(1500);
             sendNotice();
         }
+    */
     }
 }
 

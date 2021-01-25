@@ -84,39 +84,13 @@ void main(void)
 
     // Disable the Global Interrupts
     //INTERRUPT_GlobalInterruptDisable();
-    /*
+    
     Initial();
     ChargeDutyValue();
     __delay_ms(1500);
-    */
     
     while (1)
-    {
-        theta = -70;
-        mappedtheta = map(theta,-70,70,77,30);
-        PWM2_LoadDutyValue(mappedtheta);
-        __delay_ms(1500);
-        theta = -52;
-        mappedtheta = map(theta,-70,70,77,30);
-        PWM2_LoadDutyValue(mappedtheta);
-        __delay_ms(1500);
-        theta = -45;
-        mappedtheta = map(theta,-70,70,77,30);
-        PWM2_LoadDutyValue(mappedtheta);
-        __delay_ms(1500);
-        theta = -30;
-        mappedtheta = map(theta,-70,70,77,30);
-        PWM2_LoadDutyValue(mappedtheta);
-        __delay_ms(1500);
-        theta = 0;
-        mappedtheta = map(theta,-70,70,77,30);
-        PWM2_LoadDutyValue(mappedtheta);
-        __delay_ms(2000);
-        theta = 10;
-        mappedtheta = map(theta,-70,70,77,30);
-        PWM2_LoadDutyValue(mappedtheta);
-        __delay_ms(2000);
-        /*
+    {   
         move();
         if(getch() == 'j'){  
             PickUp();
@@ -141,7 +115,6 @@ void main(void)
             __delay_ms(1500);
             sendNotice();
         }
-    */
     }
 }
 
@@ -220,6 +193,7 @@ void Stab(){
         theta--;
         mappedtheta = map(theta,-70,70,77,30);
         PWM2_LoadDutyValue(mappedtheta);
+        __delay_ms(50);
         psi--;
         mappedpsi = map(psi,-70,70,77,30);
         PWM3_LoadDutyValue(mappedpsi);
@@ -230,6 +204,7 @@ void Stab(){
         theta++;
         mappedtheta = map(theta,-70,70,77,30);
         PWM2_LoadDutyValue(mappedtheta);
+        __delay_ms(50);
         psi++;
         mappedpsi = map(psi,-70,70,77,30);
         PWM3_LoadDutyValue(mappedpsi);
@@ -297,14 +272,17 @@ void Down(){
         psi = 90 - lambda - alpha_0;
         mappedpsi = map(psi,-70,70,77,30);
         PWM3_LoadDutyValue(mappedpsi);
+        __delay_ms(50);
     }
     else if(theta < 10) {     // Cerca
         psi = 90 - mu - alpha;
         mappedpsi = map(psi,-70,70,77,30);
         PWM3_LoadDutyValue(mappedpsi);
+        __delay_ms(50);
         theta = 45 - alpha;
         mappedtheta = map(theta,-70,70,77,30);
         PWM2_LoadDutyValue(mappedtheta);
+        __delay_ms(50);
     }
 }
 

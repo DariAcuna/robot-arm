@@ -31,6 +31,8 @@ somechar = 0
 is_sweep = 0
 is_stab = 0
 
+# changes will be made
+
 
 def sweep():
     global receivedData

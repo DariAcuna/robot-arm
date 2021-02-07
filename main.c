@@ -274,9 +274,9 @@ void Down(){
         __delay_ms(50);
     }
     else {     // Cerca
-        radalpha = asin(C/sqrt(pow(C,2)+pow(D,2))) + asin((pow(B,2)-(pow(A,2)+pow(C,2)+pow(D,2))) / (2*A*sqrt(pow(C,2)+pow(D,2))));
+        radalpha = 2*(atan((-sqrt(-pow(A,4)+2*pow(A*B,2)+2*pow(A*C,2)+2*pow(A*D,2)-pow(B,4)+2*pow(B*C,2)+2*pow(B*D)-pow(C,4)-2*pow(C*D,2)-pow(D,4))-2*A*D)/(pow(A,2)-pow(B,2)+2*A*C+pow(C,2)+pow(D,2)));
         alpha = (int)(radalpha*(180/pi));
-        radmu = asin((pow(B,2)+ pow(D,2)+pow(C,2)-pow(A,2))/(2*B*sqrt(pow(C,2)+pow(D,2)))) - asin(C/sqrt(pow(C,2)+pow(D,2)));
+        radmu = 2*(atan((sqrt(-pow(A,4)+2*pow(A*B,2)+2*pow(A*C,2)+2*pow(A*D,2)-pow(B,4)+2*pow(B*C,2)+2*pow(B*D)-pow(C,4)-2*pow(C*D,2)-pow(D,4))-2*B*D)/(pow(A,2)-pow(B,2)-2*B*C-pow(C,2)-pow(D,2)));
         mu = (int)(radmu*(180/pi));
         psi = 90 - mu - alpha;
         mappedpsi = map(psi,-70,70,77,30);

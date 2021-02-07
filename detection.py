@@ -31,7 +31,9 @@ somechar = 0
 is_sweep = 0
 is_stab = 0
 
-# changes will be made
+# helper variables
+
+isObj = 0
 
 
 def sweep():
@@ -139,6 +141,16 @@ def initcont():            # general instruction: go to initial and contraction 
 
             if someChar == 's':
                 break
+
+
+# Checks if cork is within the camera FOV
+# isObt is set if it is, 0 if otherwise
+def detection(cntList):
+    global isObj
+    if not cntList:
+        isObj = 0
+    else:
+        isObj = 1
 
 
 while True:

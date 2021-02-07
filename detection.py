@@ -124,14 +124,23 @@ def stab():
         is_stab = 1
 
 
-def initcont():            # general instruction: go to initial and contraction position
+def initcont(cntList):            # general instruction: go to initial and contraction position
     global receivedData
     global someChar
+    global isObj
 
     while True:
         ser.write(b't')
         print("T")
 
+        # If cork is in FOV, interrupt motion to init
+        detection(cntList)
+        if isObj:
+            # Notifies microcontroller that there is in fact a cork
+            ser.write(b'i')
+            break
+
+        # default case
         if ser.in_waiting > 0:
             print(ser.in_waiting)
             receivedData = ser.read(1)
@@ -217,7 +226,7 @@ while True:
                             break
 
         else:
-            initcont()
+            initcont(contours)
 
         break
 

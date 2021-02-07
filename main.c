@@ -257,8 +257,8 @@ void Down(){
     double D = d - h;
     double C;
 
-    alpha_0 = 45 - theta;  
-    radalpha_0 = alpha*(pi/180);
+    alpha_0 = 45 - theta;
+    radalpha_0 = alpha_0*(pi/180);
     C = b + a*cos(radalpha_0);
    
     if (cos(radalpha_0) >= cos(35*(pi/180))) {      // Lejos
@@ -273,8 +273,8 @@ void Down(){
         PWM2_LoadDutyValue(mappedtheta);
         __delay_ms(50);
     }
-    else if(cos(radalpha_0) < cos(35*(pi/180))) {     // Cerca
-        radalpha = asin(C/sqrt(pow(C,2)+pow(D,2)))+asin((pow(B,2)-(pow(A,2)+pow(C,2)+pow(D,2)))/(2*A*sqrt(pow(C,2)+pow(D,2))));
+    else {     // Cerca
+        radalpha = asin(C/sqrt(pow(C,2)+pow(D,2))) + asin((pow(B,2)-(pow(A,2)+pow(C,2)+pow(D,2))) / (2*A*sqrt(pow(C,2)+pow(D,2))));
         alpha = (int)(radalpha*(180/pi));
         radmu = asin((pow(B,2)+ pow(D,2)+pow(C,2)-pow(A,2))/(2*B*sqrt(pow(C,2)+pow(D,2)))) - asin(C/sqrt(pow(C,2)+pow(D,2)));
         mu = (int)(radmu*(180/pi));
@@ -290,7 +290,6 @@ void Down(){
 }
 
 void PickUp(){
-    
     gamma=-10;
     ChargeDutyValue();
     __delay_ms(1500);

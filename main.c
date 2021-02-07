@@ -101,12 +101,10 @@ void main(void)
             Initial();
             ChargeDutyValue();
             
-            // If encountered object, movement to initial position is 
-            // interrupted to located said object.
-            if(getch() == 'j'){
-                sendNotice();
+            // If cork is detected, continue
+            if(getch() == 'i'){
                 continue;
-            }
+            } 
 
             // Increase time to 1 minute.
             __delay_ms(1500);

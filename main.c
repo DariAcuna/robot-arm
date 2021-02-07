@@ -261,14 +261,9 @@ void Down(){
     radalpha_0 = alpha*(pi/180);
     C = b + a*cos(radalpha_0);
    
-    radalpha = asin(C/sqrt(pow(C,2)+pow(D,2)))+asin((pow(B,2)-(pow(A,2)+pow(C,2)+pow(D,2)))/(2*A*sqrt(pow(C,2)+pow(D,2))));
-    radmu = asin((pow(B,2)+ pow(D,2)+pow(C,2)-pow(A,2))/(2*B*sqrt(pow(C,2)+pow(D,2)))) - asin(C/sqrt(pow(C,2)+pow(D,2)));
-    radlambda = asin((D+C-b)/B);
-    alpha = (int)(radalpha*(180/pi));
-    mu = (int)(radmu*(180/pi));
-    lambda = (int)(radlambda*(180/pi));
-    
     if (cos(radalpha_0) >= cos(35*(pi/180))) {      // Lejos
+        radlambda = asin((D+C-b)/B);
+        lambda = (int)(radlambda*(180/pi));
         psi = 90 - lambda - alpha_0;
         mappedpsi = map(psi,-70,70,77,30);
         PWM3_LoadDutyValue(mappedpsi);
@@ -279,6 +274,10 @@ void Down(){
         __delay_ms(50);
     }
     else if(cos(radalpha_0) < cos(35*(pi/180))) {     // Cerca
+        radalpha = asin(C/sqrt(pow(C,2)+pow(D,2)))+asin((pow(B,2)-(pow(A,2)+pow(C,2)+pow(D,2)))/(2*A*sqrt(pow(C,2)+pow(D,2))));
+        alpha = (int)(radalpha*(180/pi));
+        radmu = asin((pow(B,2)+ pow(D,2)+pow(C,2)-pow(A,2))/(2*B*sqrt(pow(C,2)+pow(D,2)))) - asin(C/sqrt(pow(C,2)+pow(D,2)));
+        mu = (int)(radmu*(180/pi));
         psi = 90 - mu - alpha;
         mappedpsi = map(psi,-70,70,77,30);
         PWM3_LoadDutyValue(mappedpsi);

@@ -256,8 +256,12 @@ void Down(){
     double B = b + c;
     double D = d - h;
     double C;
+    double theta_0;
+    double radtheta_0;
     
-    alpha_0 = 45 - theta;  
+    theta_0 = theta;
+    radtheta_0 = theta_0*(pi/180);
+    alpha_0 = 45 - theta_0;  
     radalpha_0 = alpha*(pi/180);
     C = b + a*cos(radalpha_0);
    
@@ -268,13 +272,13 @@ void Down(){
     mu = (int)(radmu*(180/pi));
     lambda = (int)(radlambda*(180/pi));
     
-    if (theta >= 10) {      // Lejos
+    if (a*cos(radtheta_0) <= a*cos(10*(pi/180))) {      // Lejos
         psi = 90 - lambda - alpha_0;
         mappedpsi = map(psi,-70,70,77,30);
         PWM3_LoadDutyValue(mappedpsi);
         __delay_ms(50);
     }
-    else if(theta < 10) {     // Cerca
+    else if(a*cos(radtheta_0) > a*cos(10*(pi/180))) {     // Cerca
         psi = 90 - mu - alpha;
         mappedpsi = map(psi,-70,70,77,30);
         PWM3_LoadDutyValue(mappedpsi);

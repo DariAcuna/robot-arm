@@ -94,21 +94,12 @@ void main(void)
         move();
         if(getch() == 'j'){  
             PickUp();
-            __delay_ms(1500);
+            __delay_ms(3000);
             sendNotice();
         }
         if(getch() == 't'){  
             Initial();
             ChargeDutyValue();
-            
-            // If encountered object, movement to initial position is 
-            // interrupted to located said object.
-            if(getch() == 'j'){
-                sendNotice();
-                continue;
-            }
-
-            // Increase time to 1 minute.
             __delay_ms(1500);
             Contraction();
             ChargeDutyValue();

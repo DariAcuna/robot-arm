@@ -51,8 +51,8 @@ uint16_t psi, mappedpsi;        //elbow
 uint16_t gamma, mappedgamma;    //tweezers
 
 //medidas del brazo
-double d = 113; //(mm) altura desde la base al hombro
-double h = 18.5; //1/2 de la latura del objeto: 37mm
+double d = 36; //(mm) altura desde la base al hombro
+double h = 18.5; //1/2 de la altura del objeto: 37mm
 double a = 119; //(mm) antebrazo
 double b = 110; // (mm) brazo 
 double c = 90; // (mm) pinza

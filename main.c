@@ -101,9 +101,6 @@ void main(void)
             Initial();
             ChargeDutyValue();
             __delay_ms(1500);
-            Contraction();
-            ChargeDutyValue();
-            __delay_ms(1500);
             sendNotice();
         }
     }

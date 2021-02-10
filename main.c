@@ -233,51 +233,25 @@ void Contraction(){
 
 void Down(){
     int alpha_0;
-    int alpha;
-    int mu;
     int lambda;
     double radalpha_0;
-    double radalpha;
-    double radmu;
     double radlambda;
-    double A = a;
     double B = b + c;
     double D = d - h;
     double C;
-    double longTerm;
 
     alpha_0 = 45 - theta;
     radalpha_0 = alpha_0*(pi/180);
+
     C = b + a*cos(radalpha_0);
-    longTerm = -pow(A,4)+2*pow(A*B,2)+2*pow(A*C,2)+2*pow(A*D,2)-pow(B,4);
-    longTerm += 2*pow(B*C,2)+2*pow(B*D,2)-pow(C,4)-2*pow(C*D,2)-pow(D,4);
-    radalpha = 2*(atan((-sqrt(longTerm)-2*A*D)/(pow(A,2)-pow(B,2)+2*A*C+pow(C,2)+pow(D,2))));
-    radmu = 2*(atan((sqrt(longTerm)-2*B*D)/(pow(A,2)-pow(B,2)-2*B*C-pow(C,2)-pow(D,2))));
+
     radlambda = asin((D+C-b)/B);
-    alpha = (int)(radalpha*(180/pi));
-    mu = (int)(radmu*(180/pi));
     lambda = (int)(radlambda*(180/pi));
     
-    if (cos(radalpha_0) >= cos(35*(pi/180))) {      // Lejos
-        psi = 90 - lambda - alpha_0;
-        mappedpsi = map(psi,-70,70,77,30);
-        PWM3_LoadDutyValue(mappedpsi);
-        __delay_ms(50);
-        theta = 45 - alpha_0;
-        mappedtheta = map(theta,-70,70,77,30);
-        PWM2_LoadDutyValue(mappedtheta);
-        __delay_ms(50);
-    }
-    else {     // Cerca
-        psi = 90 - mu - alpha;
-        mappedpsi = map(psi,-70,70,77,30);
-        PWM3_LoadDutyValue(mappedpsi);
-        __delay_ms(50);
-        theta = 45 - alpha;
-        mappedtheta = map(theta,-70,70,77,30);
-        PWM2_LoadDutyValue(mappedtheta);
-        __delay_ms(50);
-    }
+    psi = 90 - lambda - alpha_0;
+    mappedpsi = map(psi,-70,70,77,30);
+    PWM3_LoadDutyValue(mappedpsi);
+    __delay_ms(50);
 }
 
 void PickUp(){

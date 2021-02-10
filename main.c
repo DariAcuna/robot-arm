@@ -52,8 +52,7 @@ uint16_t gamma, mappedgamma;    //tweezers
 
 //medidas del brazo
 double d = 36; //(mm) altura desde la base al hombro
-double h = 18.5; //1/2 de la altura del objeto: 37mm
-double a = 119; //(mm) antebrazo
+double a = 122; //(mm) antebrazo
 double b = 110; // (mm) brazo 
 double c = 90; // (mm) pinza
 
@@ -236,16 +235,11 @@ void Down(){
     int lambda;
     double radalpha_0;
     double radlambda;
-    double B = b + c;
-    double D = d - h;
-    double C;
 
     alpha_0 = 45 - theta;
     radalpha_0 = alpha_0*(pi/180);
 
-    C = b + a*cos(radalpha_0);
-
-    radlambda = asin((D+C-b)/B);
+    radlambda = asin((a*sin(radalpha_0)+d)/(b+c));
     lambda = (int)(radlambda*(180/pi));
     
     psi = 90 - lambda - alpha_0;

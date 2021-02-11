@@ -218,7 +218,7 @@ void move(){
 
 void Initial(){
     phi = 0;        
-    theta = -52;      
+    theta = -35;      
     psi = -7;        
     gamma = 45; 
 }
@@ -242,7 +242,7 @@ void Down(){
     radlambda = asin((a*sin(radalpha_0)+d)/(b+c));
     lambda = (int)(radlambda*(180/pi));
     
-    psi = 90 - lambda - alpha_0;
+    psi = 90 - lambda - alpha_0 - 10;
     mappedpsi = map(psi,-70,70,77,30);
     PWM3_LoadDutyValue(mappedpsi);
     __delay_ms(50);
